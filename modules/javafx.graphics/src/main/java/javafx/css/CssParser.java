@@ -4024,7 +4024,7 @@ final public class CssParser {
         ParsedValue<?, Size> time = parseTime(term);
         Size size = (Size)time.getValue();
         if (size.getValue() < 0) {
-            error(term, "Invalid <transition-duration> \'" + size.getValue() + "\'");
+            error(term, "Invalid \'<transition-duration>\'");
         }
 
         return new ParsedValueImpl<>(time, DurationConverter.getInstance());
