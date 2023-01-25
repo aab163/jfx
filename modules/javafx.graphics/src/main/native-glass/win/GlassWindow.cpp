@@ -1934,7 +1934,7 @@ JNIEXPORT void JNICALL Java_com_sun_glass_ui_win_WinWindow__1setCursor
 /*
  * Class:     com_sun_glass_ui_win_WinWindow
  * Method:    _setDarkFrame
- * Signature: (Z)V
+ * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_sun_glass_ui_win_WinWindow__1setDarkFrame
     (JNIEnv *env, jobject jThis, jlong ptr, jboolean dark)
