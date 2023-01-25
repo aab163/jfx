@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2022, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2010, 2023, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -575,6 +575,45 @@ public class Stage extends Window {
      */
     public final Window getOwner() {
         return owner;
+    }
+
+    /**
+     * Specifies whether the window decorations of this stage have a light or dark appearance.
+     * If the platform does not support dark window decorations, setting this property has no effect.
+     * <p>
+     * Applications can synchronize the appearance of window decorations with the preferred platform
+     * appearance by binding this property to the corresponding platform preference:
+     * <pre>{@code
+     *     var stage = new Stage();
+     *     stage.appearanceProperty().bind(Platform.getPreferences().appearanceProperty());
+     *     stage.setScene(...);
+     *     stage.show();
+     * }</pre>
+     *
+     * @defaultValue {@code Appearance.LIGHT}
+     * @since 21
+     */
+    private final ObjectProperty<Appearance> appearance =
+        new SimpleObjectProperty<>(this, "appearance", Appearance.LIGHT) {
+            @Override
+            protected void invalidated() {
+                TKStage peer = getPeer();
+                if (peer != null) {
+                    peer.setDarkFrame(get() == Appearance.DARK);
+                }
+            }
+        };
+
+    public final ObjectProperty<Appearance> appearanceProperty() {
+        return appearance;
+    }
+
+    public final Appearance getAppearance() {
+        return appearance.get();
+    }
+
+    public final void setAppearance(Appearance appearance) {
+        this.appearance.set(appearance);
     }
 
     /**
@@ -1161,7 +1200,7 @@ public class Stage extends Window {
                 }
             }
             setPeer(toolkit.createTKStage(this, isSecurityDialog(),
-                    stageStyle, isPrimary(), getModality(), tkStage, rtl, acc));
+                    stageStyle, getAppearance() == Appearance.DARK, isPrimary(), getModality(), tkStage, rtl, acc));
             getPeer().setMinimumSize((int) Math.ceil(getMinWidth()),
                     (int) Math.ceil(getMinHeight()));
             getPeer().setMaximumSize((int) Math.floor(getMaxWidth()),

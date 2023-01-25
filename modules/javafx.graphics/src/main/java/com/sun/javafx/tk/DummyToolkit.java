@@ -102,7 +102,9 @@ final public class DummyToolkit extends Toolkit {
     }
 
     @Override
-    public TKStage createTKStage(Window peerWindow, boolean securityDialog, StageStyle stageStyle, boolean primary, Modality modality, TKStage owner, boolean rtl, @SuppressWarnings("removal") AccessControlContext acc) {
+    public TKStage createTKStage(Window peerWindow, boolean securityDialog, StageStyle stageStyle, boolean darkFrame,
+                                 boolean primary, Modality modality, TKStage owner, boolean rtl,
+                                 @SuppressWarnings("removal") AccessControlContext acc) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
