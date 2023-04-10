@@ -193,7 +193,7 @@ final class EmbeddedStage extends GlassStage implements EmbeddedStageInterface {
     @Override
     public void setDarkFrame(boolean dark) {
         if (QuantumToolkit.verbose) {
-            System.err.println("EmbeddedStage.setDarkMode " + dark);
+            System.err.println("EmbeddedStage.setDarkFrame " + dark);
         }
     }
 
